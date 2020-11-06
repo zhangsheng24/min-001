@@ -1,0 +1,24 @@
+<view class="goods_list">
+    <SearchInput></SearchInput>
+    <Tabs tabs='{{tabs}}' bind:tabsItemChange='tabsItemChange'>
+        <block>
+            <view class="first_tab">
+                <navigator 
+                class="goods_item" 
+                wx:for="{{goodsList}}"
+                wx:key='index'
+                url="/pages/goods_detail/index?goods_id={{item.goods_id}}"
+                >
+                    <view class="goods_img_wrap">
+                        <image mode="widthFix" src="{{item.goods_small_logo}}" />
+                    </view>
+                    <view class="goods_info_wrap">
+                        <view class="goods_name">{{item.goods_name}}</view>
+                        <view class="goods_price">{{item.goods_price}}</view>
+                    </view>
+                </navigator>
+            </view>
+        </block>
+    </Tabs>
+    <view class=""></view>
+</view>

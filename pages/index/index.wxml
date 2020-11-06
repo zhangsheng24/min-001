@@ -1,0 +1,37 @@
+<!-- pages/index/index.wxml -->
+<view class="pyg_index">
+    <SearchInput />
+    <!-- 轮播图 -->
+    <view class="index_swiper">
+        <swiper autoplay indicator-dots circular>
+            <!-- 1.swiper标签存在默认的宽度和高度100%*150px
+                2.image标签也存在默认的宽度和高度320px*240px
+                3.设计图片和轮播图
+                    1.先看原图宽高 750*340
+                    2.让图片的高度自适应，宽度等于100%
+                    3.让swiper标签的高度变成和图片的高一样即可 -->
+            <swiper-item wx:for="{{swiperList}}" wx:key="goods_id">
+                <navigator>
+                    <image class="" src="{{item.image_src}}" mode="widthFix"></image>
+                </navigator>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="index_cate">
+        <navigator class="cateNavList" wx:for="{{cateList}}" wx:key="name">
+            <image src="{{item.image_src}}" mode="widthFix"></image>
+        </navigator>
+    </view>
+    <view class="index_floor">
+        <view class="floor_group" wx:for="{{floorList}}" wx:for-item='item1' wx:for-index='index1' wx:key='index'>
+            <view class="floor_title">
+                <image src="{{item1.floor_title.image_src}}" mode="widthFix"></image>
+            </view>
+            <view class="floor_list">
+                <navigator class="imgBox" wx:for="{{item1.product_list}}" wx:for-item='item2' wx:for-index='index2' wx:key='name'>
+                    <image src="{{item2.image_src}}" mode="{{index2 === 0?'widthFix':'scaleToFill'}}"></image>
+                </navigator>
+            </view>
+        </view>
+    </view>
+</view>
