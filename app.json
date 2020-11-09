@@ -12,7 +12,8 @@
     "pages/feedback/index",
     "pages/login/index",
     "pages/auth/index",
-    "pages/pay/index"
+    "pages/pay/index",
+    "pages/testApi/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -53,7 +54,6 @@
       }
     ]
   },
-  
   "style": "v2",
   "sitemapLocation": "sitemap.json"
 }

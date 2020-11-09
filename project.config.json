@@ -92,6 +92,13 @@
 					"pathName": "pages/cart/index",
 					"query": "goods_id=43986",
 					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "pages/testApi/index",
+					"pathName": "pages/testApi/index",
+					"query": "",
+					"scene": null
 				}
 			]
 		}
