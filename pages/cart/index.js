@@ -99,6 +99,23 @@ Page({
     const cart=wx.getStorageSync('cart') || [];
     //[].every()会返回true
     // const allchecked=cart.length?cart.every(v=>v.checked):false
+    this.setData({
+      address
+    })
+    this.setCard(cart)
+
+  },
+  handleItemChange(e){
+    console.log(e)
+    const {goods_id}=e.currentTarget.dataset.item
+    let {cart}=this.data
+    let index=cart.findIndex(v=>v.goods_id === goods_id)
+    cart[index].checked=!cart[index].checked
+    this.setCard(cart)
+  },
+
+  //设置购物车状态，重新计算
+  setCard(cart){
     let allchecked=true
     let totalPrice=0
     let totalNum=0
@@ -112,15 +129,45 @@ Page({
     })
     allchecked=cart.length!=0?allchecked:false
     this.setData({
-      address,
       cart,
-      allchecked,
       totalPrice,
-      totalNum
+      totalNum,
+      allchecked
     })
+    wx.setStorageSync('cart', cart);
   },
-  itemChange(e){
+
+  //全选
+  handleAllChange(){
+    let {cart,allchecked}=this.data
+    allchecked=!allchecked
+    cart.forEach(v=>v.checked=allchecked)
+    this.setCard(cart)
+
+  },
+
+  handleChangeNum(e){
     console.log(e)
+    const {id,operation}=e.currentTarget.dataset
+    let {cart}=this.data
+    const index=cart.findIndex(v=>v.goods_id === id)
+    if(cart[index].num === 1 && operation === -1){
+      wx.showModal({
+        title: '提示',
+        content: '您是否要删除？',
+        success: (result) => {
+          if (result.confirm) {
+            cart.splice(index,1)
+            this.setCard(cart)
+          }
+        },
+      });
+    }else{
+      cart[index].num+=operation
+      this.setCard(cart)
+    }
+    
+    
   },
 
   /**
